@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input-box">
+        <button onclick="updatelist()">+Add</button>
+    </div>
+    <ul id="list"></ul>
+    <script>
+        let inputbox = document.getElementById('input-box');
+        let list = document.getElementById('list');
+        const updatelist = () => {
+            let li = document.createElement('li');
+            li.append(inputbox.value);
+            list.appendChild(li);
+        }
+
+        // Select the node that will be observed for mutations
+        const targetNode = document.getElementById('list');
+
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: true, childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = function (mutationsList, observer) {
+            // Use traditional 'for loops' for IE 11
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('A child node has been added or removed.');
+                }
+                else if (mutation.type === 'attributes') {
+                    console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                }
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+
+        // Later, you can stop observing
+        // observer.disconnect();
+    </script>
+</body>
+
+</html>

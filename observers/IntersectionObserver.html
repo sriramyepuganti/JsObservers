@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="vh-100 vw-100 bg-blue"></div>
+    <div class="vh-100 vw-100 bg-green"></div>
+    <div class="vh-100 vw-100 bg-red" id="target"></div>
+    <script>
+        let target = document.getElementById('target');
+        let observer = new  IntersectionObserver(cb);
+        observer.observe(target);
+        function cb(mutationsList) {
+            console.log(mutationsList);
+        }
+        // observer.unobserve();
+        // observer.disconnect();
+    </script>
+</body>
+</html>
